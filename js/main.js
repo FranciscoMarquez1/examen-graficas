@@ -13,17 +13,21 @@ function main()
     canvas = document.getElementById("canvas");
     renderer = new THREE.WebGLRenderer({canvas: canvas});
     renderer.setSize(canvas.width, canvas.height);
-    renderer.setClearColor("black");                    
+    renderer.setClearColor("black");
+
+    //GEOMETRY and MATERIAL
+    geometry = new THREE.BoxGeometry();
+    material = new THREE.MeshNormalMaterial();
 
     // LIGHTS
-    light = new THREE.AmbientLight();    
+    light = new THREE.AmbientLight();
 
     // CAMERAS
     camera = new THREE.PerspectiveCamera(60., canvas.width / canvas.height, 0.01, 10000.);  // CAMERA
-    camera.position.set(0., 0., 5.);           
+    camera.position.set(0., 0., 5.);
 
     // SCENE
-    scene = new THREE.Scene();                                 
+    scene = new THREE.Scene();
     scene.add(camera);
     scene.add(light);
 
@@ -33,7 +37,7 @@ function main()
     // ACTION
     requestAnimationFrame(renderLoop);              // RENDER LOOP
 }
-       
+
 function renderLoop() {
     if(sceneReady)
     {
