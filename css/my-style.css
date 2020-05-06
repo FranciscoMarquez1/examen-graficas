@@ -10,6 +10,15 @@ img {
   height: 50px;
 }
 
+.cords_fields{
+  width: 45px;
+}
+
+.cords{
+  display: flex;
+  flex-direction: row;
+}
+
 .action{
 	cursor: pointer;
 	border: 2px solid transparent;

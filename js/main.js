@@ -6,6 +6,8 @@ var camera;
 var light;
 var mesh;
 var sceneReady = false;
+var figs;
+var axes;
 
 function main()
 {
@@ -15,9 +17,11 @@ function main()
     renderer.setSize(canvas.width, canvas.height);
     renderer.setClearColor("black");
 
+    //AXES
+    axes = new Axes();
+
     //GEOMETRY and MATERIAL
-    geometry = new THREE.BoxGeometry();
-    material = new THREE.MeshNormalMaterial();
+    figs = []
 
     // LIGHTS
     light = new THREE.AmbientLight();
@@ -25,9 +29,11 @@ function main()
     // CAMERAS
     camera = new THREE.PerspectiveCamera(60., canvas.width / canvas.height, 0.01, 10000.);  // CAMERA
     camera.position.set(0., 0., 5.);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     // SCENE
     scene = new THREE.Scene();
+    scene.add(axes);
     scene.add(camera);
     scene.add(light);
 
@@ -39,9 +45,10 @@ function main()
 }
 
 function renderLoop() {
+    renderer.render(scene, camera);
     if(sceneReady)
     {
-         renderer.render(scene, camera);
+
          mesh.rotation.x = mesh.rotation.x + 0.01;
          mesh.rotation.y = mesh.rotation.y + 0.01;
     }
