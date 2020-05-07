@@ -16,6 +16,7 @@ function toolsEvent(evt)
         document.getElementById('eraser-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
         document.getElementById('painter-menu').style.display = 'none';
+        document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('point-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -34,6 +35,7 @@ function toolsEvent(evt)
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
         document.getElementById('painter-menu').style.display = 'none';
+        document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('eraser-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -50,6 +52,7 @@ function toolsEvent(evt)
         document.getElementById('eraser-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
         document.getElementById('painter-menu').style.display = 'none';
+        document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('plane-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -76,6 +79,7 @@ function toolsEvent(evt)
         document.getElementById('eraser-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
         document.getElementById('painter-menu').style.display = 'none';
+        document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('triangle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -99,19 +103,19 @@ function toolsEvent(evt)
         break;
       case "7":
       //Rectangle or cube
-        geometry = new THREE.BoxGeometry();
-        //MATERIAL
-        material = new THREE.MeshNormalMaterial();
-        //MESH (GEOMETRY + MATERIAL)
-        mesh = new THREE.Mesh(geometry, material);
-        mesh.name = "Square " + numSquare;
-        numSquare++;
-        var option = document.createElement("option");
-        option.text = mesh.name;
-        selectErase.add(option);
-        selectPaint.add(option);
-        scene.add(mesh);
-        //sceneReady = true;
+        document.getElementById('plane-menu').style.display = 'none';
+        document.getElementById('triangle-menu').style.display = 'none';
+        document.getElementById('circle-menu').style.display = 'none';
+        document.getElementById('point-menu').style.display = 'none';
+        document.getElementById('eraser-menu').style.display = 'none';
+        document.getElementById('painter-menu').style.display = 'none';
+        document.getElementById('addGroup-menu').style.display = 'none';
+        var result_style = document.getElementById('rectangle-menu').style;
+        if(result_style.display == "none"){
+          result_style.display = 'flex';
+        }else{
+          result_style.display = 'none';
+        }
         break;
       case "8":
       //Fill or wireframe
@@ -124,6 +128,7 @@ function toolsEvent(evt)
         document.getElementById('eraser-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
         document.getElementById('painter-menu').style.display = 'none';
+        document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('circle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -141,6 +146,7 @@ function toolsEvent(evt)
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('eraser-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
+        document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('painter-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -159,6 +165,7 @@ function toolsEvent(evt)
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('eraser-menu').style.display = 'none';
         document.getElementById('painter-menu').style.display = 'none';
+        document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('addGroup-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -271,6 +278,24 @@ function addCircle(){
   //sceneReady = true;
 }
 
+function addRectangle(){
+  var width = document.getElementById("w_cube").value;
+  var height = document.getElementById("h_cube").value;
+  var depth = document.getElementById("d_cube").value;
+
+  geometry = new THREE.BoxGeometry(width, height, depth);
+  //MATERIAL
+  material = new THREE.MeshBasicMaterial({color: 0xffffff});
+  //MESH (GEOMETRY + MATERIAL)
+  mesh = new THREE.Mesh(geometry, material);
+  mesh.name = "Square " + numSquare;
+  numSquare++;
+  var option = document.createElement("option");
+  option.text = mesh.name;
+
+  scene.add(mesh);
+  //sceneReady = true;
+}
 function eraseFigure(){
   var selectedObject = scene.getObjectByName(selectErase.value);
   scene.remove(selectedObject);

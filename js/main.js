@@ -98,6 +98,5 @@ function addToGroup(figure, selector){
 function addOption(selector, text){
   var option = document.createElement("option");
   option.text = text;
-
   selector.add(option);
 }
