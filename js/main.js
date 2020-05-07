@@ -8,6 +8,10 @@ var mesh;
 var sceneReady = false;
 var figs;
 var axes;
+var numCircle, numSquare, numPoint;
+var selectErase, selectPaint;
+var colorInput;
+
 
 function main()
 {
@@ -22,6 +26,13 @@ function main()
 
     //GEOMETRY and MATERIAL
     figs = []
+    numCircle = numSquare = numPoint = 1;
+
+    // INPUTS FROM HTML
+    selectErase = document.getElementById("erase-figures");
+    selectPaint = document.getElementById("painter-figures");
+    colorInput = document.getElementById('color-palette');
+
 
     // LIGHTS
     light = new THREE.AmbientLight();

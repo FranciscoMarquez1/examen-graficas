@@ -13,6 +13,7 @@ function toolsEvent(evt)
         document.getElementById('plane-menu').style.display = 'none';
         document.getElementById('triangle-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
+        document.getElementById('eraser-menu').style.display = 'none';
         var result_style = document.getElementById('point-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -25,6 +26,16 @@ function toolsEvent(evt)
 
         break;
       case "2":
+        document.getElementById('plane-menu').style.display = 'none';
+        document.getElementById('triangle-menu').style.display = 'none';
+        document.getElementById('circle-menu').style.display = 'none';
+        document.getElementById('point-menu').style.display = 'none';
+        var result_style = document.getElementById('eraser-menu').style;
+        if(result_style.display == "none"){
+          result_style.display = 'flex';
+        }else{
+          result_style.display = 'none';
+        }
       //Ereaser
         break;
       case "3":
@@ -32,6 +43,7 @@ function toolsEvent(evt)
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('triangle-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
+        document.getElementById('eraser-menu').style.display = 'none';
         var result_style = document.getElementById('plane-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -55,6 +67,7 @@ function toolsEvent(evt)
         document.getElementById('plane-menu').style.display = 'none';
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
+        document.getElementById('eraser-menu').style.display = 'none';
         var result_style = document.getElementById('triangle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -83,6 +96,12 @@ function toolsEvent(evt)
         material = new THREE.MeshNormalMaterial();
         //MESH (GEOMETRY + MATERIAL)
         mesh = new THREE.Mesh(geometry, material);
+        mesh.name = "Square " + numSquare;
+        numSquare++;
+        var option = document.createElement("option");
+        option.text = mesh.name;
+        selectErase.add(option);
+        selectPaint.add(option);
         scene.add(mesh);
         //sceneReady = true;
         break;
@@ -103,6 +122,19 @@ function toolsEvent(evt)
           document.getElementById("theta_circle").value = '0';
           document.getElementById("z_point").value = '0';
         }
+        break;
+      case "10":
+        document.getElementById('plane-menu').style.display = 'none';
+        document.getElementById('triangle-menu').style.display = 'none';
+        document.getElementById('circle-menu').style.display = 'none';
+        document.getElementById('point-menu').style.display = 'none';
+        document.getElementById('eraser-menu').style.display = 'none';
+        var result_style = document.getElementById('painter-menu').style;
+        if(result_style.display == "none"){
+          result_style.display = 'flex';
+        }else{
+          result_style.display = 'none';
+        }        
         break;
       case "11":
       //Polygon
@@ -129,6 +161,12 @@ function addPoint(){
   geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
   material = new THREE.PointsMaterial( { size: .05, color: 0xffffff } );
   mesh = new THREE.Points( geometry, material );
+  mesh.name = "Point " + numPoint
+  numPoint++;
+  var option = document.createElement("option");
+  option.text = mesh.name;
+  selectErase.add(option);
+  selectPaint.add(option);
   scene.add(mesh);
 }
 
@@ -190,8 +228,29 @@ function addCircle(){
   geometry = new THREE.CircleGeometry(r, 20, theta);
   material = new THREE.MeshNormalMaterial();
   mesh = new THREE.Mesh(geometry, material);
+  mesh.name = "Circle " + numCircle
+  numCircle++;
+  var option = document.createElement("option");
+  option.text = mesh.name;
+  selectErase.add(option);
+  selectPaint.add(option);
   scene.add(mesh);
   //sceneReady = true;
+}
+
+function eraseFigure(){
+  var selectedObject = scene.getObjectByName(selectErase.value);
+  scene.remove(selectedObject);
+  for (var i=0; i<selectErase.length; i++) {
+    if (selectErase.options[i].value == selectErase.value)
+      selectErase.remove(i);
+      selectPaint.remove(i);
+  }
+}
+
+function paintFigure(){
+  var selectedObject = scene.getObjectByName(selectPaint.value);
+  selectedObject.material.color.set(colorInput.value);
 }
 
 function initEventHandler(evt)

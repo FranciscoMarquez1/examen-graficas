@@ -88,6 +88,20 @@
               <input type="button" onclick="addCircle()" value="OK">
             </div>
           </div>
+          <div id="eraser-menu" style="display: none;">
+            <div>
+              <label>Figures:</label><br>
+              <select id="erase-figures"></select>
+              <input type="button" onclick="eraseFigure()" value="OK">
+            </div>
+          </div>
+          <div id="painter-menu" style="display: none;">
+            <div>
+              <label>Figures:</label><br>
+              <select id="painter-figures"></select>
+              <input type="button" onclick="paintFigure()" value="OK">
+            </div>
+          </div>
         </td>
       </tr>
       <tr>
@@ -107,7 +121,7 @@
         <td><img id="img-circle" class="action" src="imgs/circle.jpg" alt="" onclick="toolsEvent('9');"/></td>
       </tr>
       <tr>
-        <td><input id="color-palette" class="action" src="imgs/pallete.png" type="color" name="name" value="#000000" onclick="toolsEvent('10');" onchange="colorPaletteEvent();"></td>
+        <td><input id="color-palette" class="action" src="imgs/pallete.png" type="color" name="name" value="#000000" onclick="toolsEvent('10');"></td>
         <td><img id="img-polygon" class="action" src="imgs/polygon.png" alt="" onclick="toolsEvent('11');"/></td>
       </tr>
       <tr>
