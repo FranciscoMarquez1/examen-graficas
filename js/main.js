@@ -100,3 +100,33 @@ function addOption(selector, text){
   option.text = text;
   selector.add(option);
 }
+
+function createRadioElement(value, isInner) {
+  var radioHtml = '<input type="radio" name="group-radiob" value="' + value + '"';
+  radioHtml += '/>';
+  var label = document.createElement('label')
+  label.innerHTML = '<label for="' + value + '">' + value + '</label>'
+
+
+  var radioFragment = document.createElement('div');
+  radioFragment.innerHTML = radioHtml;
+  radioFragment.appendChild(label)
+  radioFragment.setAttribute("id", value);
+  if (isInner){
+    radioFragment.classList.add("inner-radio");
+  }
+
+  return radioFragment;
+}
+
+function addRadioGroups(name, isInner, parent){
+  var radioFragment = createRadioElement(name, isInner)
+  if (parent === undefined){
+    var radioDiv = document.getElementById("radio-selected-figure")
+    radioDiv.appendChild(radioFragment)
+  }
+  else {
+    var parentDiv = document.getElementById(parent)
+    parentDiv.appendChild(radioFragment)
+  }
+}
