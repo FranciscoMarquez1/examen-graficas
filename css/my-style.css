@@ -28,3 +28,7 @@ img {
 .action:hover{
 	border-color: rgba(28,38,227,1);
 }
+
+.inner-radio {
+  margin-left: 12px;
+}
