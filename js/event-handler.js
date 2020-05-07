@@ -14,6 +14,8 @@ function toolsEvent(evt)
         document.getElementById('triangle-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
         document.getElementById('eraser-menu').style.display = 'none';
+        document.getElementById('addGroup-menu').style.display = 'none';
+        document.getElementById('painter-menu').style.display = 'none';
         var result_style = document.getElementById('point-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -30,6 +32,8 @@ function toolsEvent(evt)
         document.getElementById('triangle-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
         document.getElementById('point-menu').style.display = 'none';
+        document.getElementById('addGroup-menu').style.display = 'none';
+        document.getElementById('painter-menu').style.display = 'none';
         var result_style = document.getElementById('eraser-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -44,6 +48,8 @@ function toolsEvent(evt)
         document.getElementById('triangle-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
         document.getElementById('eraser-menu').style.display = 'none';
+        document.getElementById('addGroup-menu').style.display = 'none';
+        document.getElementById('painter-menu').style.display = 'none';
         var result_style = document.getElementById('plane-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -68,6 +74,8 @@ function toolsEvent(evt)
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
         document.getElementById('eraser-menu').style.display = 'none';
+        document.getElementById('addGroup-menu').style.display = 'none';
+        document.getElementById('painter-menu').style.display = 'none';
         var result_style = document.getElementById('triangle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -113,6 +121,9 @@ function toolsEvent(evt)
         document.getElementById('plane-menu').style.display = 'none';
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('triangle-menu').style.display = 'none';
+        document.getElementById('eraser-menu').style.display = 'none';
+        document.getElementById('addGroup-menu').style.display = 'none';
+        document.getElementById('painter-menu').style.display = 'none';
         var result_style = document.getElementById('circle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -129,15 +140,31 @@ function toolsEvent(evt)
         document.getElementById('circle-menu').style.display = 'none';
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('eraser-menu').style.display = 'none';
+        document.getElementById('addGroup-menu').style.display = 'none';
         var result_style = document.getElementById('painter-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
         }else{
           result_style.display = 'none';
-        }        
+        }
         break;
       case "11":
       //Polygon
+        break;
+      case "12":
+      //Add Group
+        document.getElementById('plane-menu').style.display = 'none';
+        document.getElementById('triangle-menu').style.display = 'none';
+        document.getElementById('circle-menu').style.display = 'none';
+        document.getElementById('point-menu').style.display = 'none';
+        document.getElementById('eraser-menu').style.display = 'none';
+        document.getElementById('painter-menu').style.display = 'none';
+        var result_style = document.getElementById('addGroup-menu').style;
+        if(result_style.display == "none"){
+          result_style.display = 'flex';
+        }else{
+          result_style.display = 'none';
+        }
         break;
       default:
 
@@ -163,11 +190,17 @@ function addPoint(){
   mesh = new THREE.Points( geometry, material );
   mesh.name = "Point " + numPoint
   numPoint++;
-  var option = document.createElement("option");
-  option.text = mesh.name;
-  selectErase.add(option);
-  selectPaint.add(option);
-  scene.add(mesh);
+
+  addOption(selectErase, mesh.name);
+  addOption(selectPaint, mesh.name);
+
+  if(selectedGroupPoint.value != "--Select--"){
+    var selectedGroup = scene.getObjectByName(selectedGroupPoint.value);
+    selectedGroup.add(mesh);
+  }else{
+    scene.add(mesh);
+  }
+
 }
 
 function addPlane(){
