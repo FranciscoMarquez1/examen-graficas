@@ -5,12 +5,16 @@ var scene;
 var camera;
 var light;
 var mesh;
+var plane;
 var sceneReady = false;
 var axes;
 var numCircle, numSquare, numPoint;
 var selectErase, selectPaint, selectAddGroup, selectedGroupTriangle;
-var selectedGroupPoint;
 var colorInput;
+var groups;
+var selected, selectedGroup;
+var raycaster, intersects;
+var mouse;
 
 
 function main()
@@ -21,24 +25,21 @@ function main()
     renderer.setSize(canvas.width, canvas.height);
     renderer.setClearColor("black");
 
+    //RAYCASTER
+    raycaster = new THREE.Raycaster();
+    intersects = null;
+    mouse = new THREE.Vector2(), THREE.INTERSECTED;
     //AXES
     axes = new Axes();
 
     //GEOMETRY and MATERIAL
+    groups = [];
     numCircle = numSquare = numPoint = 1;
 
     // INPUTS FROM HTML
     selectErase = document.getElementById("erase-figures");
     selectPaint = document.getElementById("painter-figures");
     selectedGroupTriangle = document.getElementById("group_select_triangle");
-    selectedGroupPoint = document.getElementById("group_select_points");
-
-
-    selectAddGroup = document.getElementById("addGroup-select");
-
-    addOption(selectAddGroup, "--Select--");
-    addOption(selectedGroupPoint, "--Select--");
-    addOption(selectedGroupTriangle, "--Select--");
 
     colorInput = document.getElementById('color-palette');
 
@@ -65,68 +66,52 @@ function main()
 }
 
 function renderLoop() {
-    renderer.render(scene, camera);
-    if(sceneReady)
-    {
 
-         mesh.rotation.x = mesh.rotation.x + 0.01;
-         mesh.rotation.y = mesh.rotation.y + 0.01;
-    }
     requestAnimationFrame(renderLoop);
+    // find intersections
+    raycaster.setFromCamera( mouse, camera );
+
+		intersects = raycaster.intersectObjects( scene.children );
+
+    renderer.render(scene, camera);
 }
 
-function addGroupFig(){
+function addGroup(){
   var name_newGroup = document.getElementById("name_group").value;
-  var group = new THREE.Group();
+  var new_group = new THREE.Group();
 
-  group.name = name_newGroup;
-
-  addOption(selectErase, group.name);
-  addOption(selectPaint, group.name);
-  addOption(selectAddGroup, group.name);
-  addOption(selectedGroupTriangle, group.name);
-  addOption(selectedGroupPoint, group.name);
-
-  scene.add(group);
+  new_group.name = name_newGroup;
+  addRadioGroups(new_group.name, groups.length);
+  groups.push(new_group);
+  scene.add(new_group);
 }
 
-function addToGroup(figure, selector){
-  var selectedGroup = scene.getObjectByName(selector.value);
-  group.add(figure);
+function addRadioGroups(name, index){
+  var radioFragment = createRadioElement(name, index)
+  var radioDiv = document.getElementById("radio-selected-figure")
 
-}
-function addOption(selector, text){
-  var option = document.createElement("option");
-  option.text = text;
-  selector.add(option);
+  radioDiv.appendChild(radioFragment)
+  radioDiv.appendChild(document.createTextNode(name));
+  radioDiv.appendChild(document.createElement('br'));
 }
 
-function createRadioElement(value, isInner) {
-  var radioHtml = '<input type="radio" name="group-radiob" value="' + value + '"';
-  radioHtml += '/>';
+function createRadioElement(name, value) {
+  var radioHtml = '<input type="radio" onclick="getIndex(this.value);" name="group-radiob" value="' + value + '"';
+  radioHtml += '/>' + name;
   var label = document.createElement('label')
-  label.innerHTML = '<label for="' + value + '">' + value + '</label>'
-
+  label.innerHTML = '<label for="' + name + '">' + name + '</label>'
 
   var radioFragment = document.createElement('div');
   radioFragment.innerHTML = radioHtml;
-  radioFragment.appendChild(label)
-  radioFragment.setAttribute("id", value);
-  if (isInner){
-    radioFragment.classList.add("inner-radio");
-  }
-
-  return radioFragment;
+  radioFragment.firstChild.setAttribute("id", name);
+  return radioFragment.firstChild;
 }
 
-function addRadioGroups(name, isInner, parent){
-  var radioFragment = createRadioElement(name, isInner)
-  if (parent === undefined){
-    var radioDiv = document.getElementById("radio-selected-figure")
-    radioDiv.appendChild(radioFragment)
-  }
-  else {
-    var parentDiv = document.getElementById(parent)
-    parentDiv.appendChild(radioFragment)
-  }
+function getIndex(index){
+  selectedGroup = groups[index];
+}
+
+function addToSelected(fig_name){
+  var select = getSelected();
+  addRadioGroups(fig_name, true, select)
 }

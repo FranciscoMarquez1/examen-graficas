@@ -21,12 +21,10 @@
             <div>
               <label>X:</label><br>
               <input class="cords_fields" type="number" id="x_point" value="0"><br>
-              <label>Groups:</label>
             </div>
             <div>
               <label>Y:</label><br>
               <input class="cords_fields" type="number" id="y_point" value="0"><br>
-              <select id="group_select_points"></select>
             </div>
             <div>
               <label>Z:</label><br>
@@ -58,7 +56,6 @@
               <input class="cords_fields" type="number" id="triangle_p1_y" value="0"><br>
               <label>Z:</label>
               <input class="cords_fields" type="number" id="triangle_p1_z" value="0"><br>
-              <label>Groups:</label>
             </div>
             <div>
               <label>P2:</label><br>
@@ -68,7 +65,6 @@
               <input class="cords_fields" type="number" id="triangle_p2_y" value="0"><br>
               <label>Z:</label>
               <input class="cords_fields" type="number" id="triangle_p2_z" value="0"><br>
-              <select id="group_select_triangle"></select>
             </div>
             <div>
               <label>P3:</label><br>
@@ -107,27 +103,11 @@
               <input type="button" onclick="addRectangle()" value="OK">
             </div>
           </div>
-          <div class="cords" id="eraser-menu" style="display: none;">
-            <div>
-              <label>Figures:</label><br>
-              <select id="erase-figures"></select>
-              <input type="button" onclick="eraseFigure()" value="OK">
-            </div>
-          </div>
-          <div class="cords" id="painter-menu" style="display: none;">
-            <div>
-              <label>Figures:</label><br>
-              <select id="painter-figures"></select>
-              <input type="button" onclick="paintFigure()" value="OK">
-            </div>
-          </div>
           <div class="cords" id="addGroup-menu" style="display: none;">
             <div>
               <label>Group name:</label><br>
               <input type="text" id="name_group" value=""><br>
-              <label>Groups:</label><br>
-              <select id="addGroup-select"></select>
-              <input type="button" onclick="addGroupFig()" value="OK">
+              <input type="button" onclick="addGroup()" value="OK">
             </div>
           </div>
           <div id="radio-selected-figure">

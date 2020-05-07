@@ -13,9 +13,7 @@ function toolsEvent(evt)
         document.getElementById('plane-menu').style.display = 'none';
         document.getElementById('triangle-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
-        document.getElementById('eraser-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
-        document.getElementById('painter-menu').style.display = 'none';
         document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('point-menu').style;
         if(result_style.display == "none"){
@@ -29,31 +27,25 @@ function toolsEvent(evt)
 
         break;
       case "2":
-        document.getElementById('plane-menu').style.display = 'none';
-        document.getElementById('triangle-menu').style.display = 'none';
-        document.getElementById('circle-menu').style.display = 'none';
-        document.getElementById('point-menu').style.display = 'none';
-        document.getElementById('addGroup-menu').style.display = 'none';
-        document.getElementById('painter-menu').style.display = 'none';
-        document.getElementById('rectangle-menu').style.display = 'none';
-        var result_style = document.getElementById('eraser-menu').style;
-        if(result_style.display == "none"){
-          result_style.display = 'flex';
-        }else{
-          result_style.display = 'none';
-        }
       //Ereaser
+        if(selected){
+          scene.remove(selected);
+          selected = null;
+        }
+        if(selectedGroup){
+          scene.remove(selectedGroup);
+          selectedGroup = null;
+        }
         break;
       case "3":
       //Segment or Plane
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('triangle-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
-        document.getElementById('eraser-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
-        document.getElementById('painter-menu').style.display = 'none';
         document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('plane-menu').style;
+        if(plane) scene.remove(plane);
         if(result_style.display == "none"){
           result_style.display = 'flex';
         }else{
@@ -65,7 +57,7 @@ function toolsEvent(evt)
         break;
       case "4":
       //Clear all
-        figs = [];
+        groups = [];
         scene = new THREE.Scene();
         scene.add(axes);
         scene.add(camera);
@@ -76,9 +68,7 @@ function toolsEvent(evt)
         document.getElementById('plane-menu').style.display = 'none';
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
-        document.getElementById('eraser-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
-        document.getElementById('painter-menu').style.display = 'none';
         document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('triangle-menu').style;
         if(result_style.display == "none"){
@@ -107,8 +97,6 @@ function toolsEvent(evt)
         document.getElementById('triangle-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
         document.getElementById('point-menu').style.display = 'none';
-        document.getElementById('eraser-menu').style.display = 'none';
-        document.getElementById('painter-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
         var result_style = document.getElementById('rectangle-menu').style;
         if(result_style.display == "none"){
@@ -125,9 +113,7 @@ function toolsEvent(evt)
         document.getElementById('plane-menu').style.display = 'none';
         document.getElementById('point-menu').style.display = 'none';
         document.getElementById('triangle-menu').style.display = 'none';
-        document.getElementById('eraser-menu').style.display = 'none';
         document.getElementById('addGroup-menu').style.display = 'none';
-        document.getElementById('painter-menu').style.display = 'none';
         document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('circle-menu').style;
         if(result_style.display == "none"){
@@ -140,19 +126,7 @@ function toolsEvent(evt)
         }
         break;
       case "10":
-        document.getElementById('plane-menu').style.display = 'none';
-        document.getElementById('triangle-menu').style.display = 'none';
-        document.getElementById('circle-menu').style.display = 'none';
-        document.getElementById('point-menu').style.display = 'none';
-        document.getElementById('eraser-menu').style.display = 'none';
-        document.getElementById('addGroup-menu').style.display = 'none';
-        document.getElementById('rectangle-menu').style.display = 'none';
-        var result_style = document.getElementById('painter-menu').style;
-        if(result_style.display == "none"){
-          result_style.display = 'flex';
-        }else{
-          result_style.display = 'none';
-        }
+      //Polygon
         break;
       case "11":
       //Polygon
@@ -163,8 +137,6 @@ function toolsEvent(evt)
         document.getElementById('triangle-menu').style.display = 'none';
         document.getElementById('circle-menu').style.display = 'none';
         document.getElementById('point-menu').style.display = 'none';
-        document.getElementById('eraser-menu').style.display = 'none';
-        document.getElementById('painter-menu').style.display = 'none';
         document.getElementById('rectangle-menu').style.display = 'none';
         var result_style = document.getElementById('addGroup-menu').style;
         if(result_style.display == "none"){
@@ -176,38 +148,27 @@ function toolsEvent(evt)
       default:
 
     }
-      //geometry = new THREE.BoxGeometry();
-      // MATERIAL
-      //material = new THREE.MeshNormalMaterial();
-      // MESH (GEOMETRY + MATERIAL)
-    	//mesh = new THREE.Mesh(geometry, material);
-    	// scene.add(mesh);
-    	// sceneReady = true;
 }
 function addPoint(){
   geometry = new THREE.BufferGeometry();
   var x = document.getElementById("x_point").value;
   var y = document.getElementById("y_point").value;
   var z = document.getElementById("z_point").value;
-  var vertices = new Float32Array( [
-    x, y, z
-  ] );
+
+  var vertices = new Float32Array( [ x, y, z] );
+
   geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
-  material = new THREE.PointsMaterial( { size: .05, color: 0xffffff } );
+  material = new THREE.PointsMaterial( { size: .05, color: colorInput.value } );
+
   mesh = new THREE.Points( geometry, material );
   mesh.name = "Point " + numPoint
   numPoint++;
 
-  addOption(selectErase, mesh.name);
-  addOption(selectPaint, mesh.name);
-
-  if(selectedGroupPoint.value != "--Select--"){
-    var selectedGroup = scene.getObjectByName(selectedGroupPoint.value);
+  if(selectedGroup != undefined){
     selectedGroup.add(mesh);
   }else{
     scene.add(mesh);
   }
-
 }
 
 function addPlane(){
@@ -216,13 +177,19 @@ function addPlane(){
   var y = document.getElementById("y_plane").value;
   geometry = new THREE.PlaneBufferGeometry(Math.floor(width/10), Math.floor(height/10), Math.floor(width/20), Math.floor(height/20));
   //MATERIAL
-  material = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true});
+  material = new THREE.MeshBasicMaterial({wireframe: true});
   //MESH (GEOMETRY + MATERIAL)
   mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(0., y, 0.)
   mesh.rotation.x = mesh.rotation.x - 1.5
-  scene.add(mesh);
-  //sceneReady = true;
+  if(plane == undefined){
+    plane = mesh;
+    scene.add(mesh);
+  } else{
+    scene.remove(plane);
+    plane = mesh;
+    scene.add(mesh);
+  }
 }
 
 function addTriangle(){
@@ -255,25 +222,31 @@ function addTriangle(){
   geometry.computeFaceNormals();
 
   //MATERIAL
-  material = new THREE.MeshBasicMaterial({color: 0xffffff});
+  material = new THREE.MeshBasicMaterial({color: colorInput.value});
   //MESH (GEOMETRY + MATERIAL)
   mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-  //sceneReady = true;
+
+  if(selectedGroup != undefined){
+    selectedGroup.add(mesh)
+  }else {
+    scene.add(mesh);
+  }
 }
 
 function addCircle(){
   r = document.getElementById("r_circle").value;
   theta = document.getElementById("theta_circle").value;
   geometry = new THREE.CircleGeometry(r, 20, theta);
-  material = new THREE.MeshNormalMaterial();
+  material = new THREE.MeshBasicMaterial({color: colorInput.value});
   mesh = new THREE.Mesh(geometry, material);
   mesh.name = "Circle " + numCircle
   numCircle++;
   var option = document.createElement("option");
   option.text = mesh.name;
-  selectErase.add(option);
-  selectPaint.add(option);
+
+  if(selectedGroup != undefined){
+    selectedGroup.add(mesh)
+  }
   scene.add(mesh);
   //sceneReady = true;
 }
@@ -285,33 +258,45 @@ function addRectangle(){
 
   geometry = new THREE.BoxGeometry(width, height, depth);
   //MATERIAL
-  material = new THREE.MeshBasicMaterial({color: 0xffffff});
+  material = new THREE.MeshBasicMaterial({color: colorInput.value});
   //MESH (GEOMETRY + MATERIAL)
   mesh = new THREE.Mesh(geometry, material);
   mesh.name = "Square " + numSquare;
   numSquare++;
-  var option = document.createElement("option");
-  option.text = mesh.name;
-
+  if(selectedGroup != undefined){
+    selectedGroup.add(mesh);
+  }else {
   scene.add(mesh);
-  //sceneReady = true;
-}
-function eraseFigure(){
-  var selectedObject = scene.getObjectByName(selectErase.value);
-  scene.remove(selectedObject);
-  for (var i=0; i<selectErase.length; i++) {
-    if (selectErase.options[i].value == selectErase.value)
-      selectErase.remove(i);
-      selectPaint.remove(i);
   }
 }
 
-function paintFigure(){
-  var selectedObject = scene.getObjectByName(selectPaint.value);
-  selectedObject.material.color.set(colorInput.value);
+function onCanvasMouseMove(event){
+        event.preventDefault();
+
+				mouse.x = ( event.clientX / canvas.width ) * 2 - 1.55;
+				mouse.y = - ( event.clientY / canvas.height ) * 2 + 1.35;
 }
 
-function initEventHandler(evt)
-{
+function onCanvasMouseClick(event){
+        event.preventDefault();
+        if ( intersects.length > 0 ) {
+    			if ( selected != intersects[ 0 ].object ) {
+    				selected = intersects[ 0 ].object;
+            //selected.material.color.set( 0xff0000 );
+    			}else {
+            //selected.material.color.set( 0xffffff );
+            selected = null;
+          }
+    		}
 
+}
+
+function watchColorPicker(event) {
+  if(selected) selected.material.color.set(event.target.value);
+}
+
+function initEventHandler(evt){
+  document.getElementById("canvas").addEventListener('mousemove', onCanvasMouseMove, false );
+  document.getElementById("canvas").addEventListener('click', onCanvasMouseClick, false );
+  document.querySelector("#color-palette").addEventListener('change', watchColorPicker, false);
 }
