@@ -32,3 +32,45 @@ img {
 .inner-radio {
   margin-left: 12px;
 }
+
+.cords input {
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+form {
+  width: 120px;
+}
+
+.cords div {
+  margin-right: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+input[type="button"] {
+  margin-top: 6px;
+}
+
+table {
+  margin: auto;
+}
+
+.column {
+  float: left;
+  width: 40%;
+}
+
+.row {
+  margin: 0px;
+  margin-right: 0px !important;
+  width: 220px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

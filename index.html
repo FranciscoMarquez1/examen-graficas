@@ -145,17 +145,23 @@
           </div>
           <div class="cords" id="rotate-menu" style="display: none;">
             <div>
-              <label>Angle:</label><br>
-              <input class="cords_fields" type="number" id="rotate_theta" value="1"><br>
-              <form name="rotation_axis">
-                <input type="radio" id="x-rotate" name="axis_rotate" value="x" checked>
-                <label for="x-rotate">X</label><br>
-                <input type="radio" id="y-rotate" name="axis_rotate" value="y">
-                <label for="y-rotate">Y</label><br>
-                <input type="radio" id="z-rotate" name="axis_rotate" value="z">
-                <label for="z-rotate">Z</label><br>
-              </form>
-              <input type="button" onclick="rotate()" value="OK">
+              <div class="row">
+                <div class="column">
+                  <label>Angle:</label><br>
+                  <input class="cords_fields" type="number" id="rotate_theta" value="1">
+                </div>
+                <div class="column">
+                  <form name="rotation_axis">
+                    <input type="radio" id="x-rotate" name="axis_rotate" value="x" checked>
+                    <label for="x-rotate">X</label><br>
+                    <input type="radio" id="y-rotate" name="axis_rotate" value="y">
+                    <label for="y-rotate">Y</label><br>
+                    <input type="radio" id="z-rotate" name="axis_rotate" value="z">
+                    <label for="z-rotate">Z</label><br>
+                  </form>
+                </div>
+                <input type="button" onclick="rotate()" value="OK">
+              </div>
             </div>
           </div>
           <div class="cords" id="line-width-menu" style="display: none;">
@@ -165,30 +171,35 @@
             </div>
           </div>
           <div class="cords" id="material-menu" style="display: none;">
-            <div>
               <form name="material_form">
-                <input type="radio" id="material-basic" name="material" value="basic" checked>
-                <label for="material-basic">Basic</label><br>
-                <input type="radio" id="material-normal" name="material" value="normal">
-                <label for="material-normal">Normal</label><br>
-                <input type="radio" id="material-depth" name="material" value="depth">
-                <label for="material-depth">Depth</label><br>
-                <input type="radio" id="material-lambert" name="material" value="lambert">
-                <label for="material-lambert">Lambert</label><br>
-                <input type="radio" id="material-phong" name="material" value="phong">
-                <label for="material-phong">Phong</label><br>
-                <input type="radio" id="material-physical" name="material" value="physical">
-                <label for="material-physical">Physical</label><br>
-                <input type="radio" id="material-standart" name="material" value="standart">
-                <label for="material-standart">Standart</label><br>
-                <input type="radio" id="material-img" name="material" value="img">
-                <label for="material-img">Img</label><br>
-                <input type="file" id="img-material">
+                <div class="row">
+                <div class="column">
+                  <input type="radio" id="material-basic" name="material" value="basic" checked>
+                  <label for="y-rotate">Basic</label><br>
+                  <input type="radio" id="material-normal" name="material" value="normal">
+                  <label for="x-rotate">Normal</label><br>
+                  <input type="radio" id="material-depth" name="material" value="depth">
+                  <label for="z-rotate">Depth</label><br>
+                  <input type="radio" id="material-lambert" name="material" value="lambert">
+                  <label for="z-rotate">Lambert</label><br>
+                </div>
+                <div class="column">
+                  <input type="radio" id="material-phong" name="material" value="phong">
+                  <label for="z-rotate">Phong</label><br>
+                  <input type="radio" id="material-physical" name="material" value="physical">
+                  <label for="z-rotate">Physical</label><br>
+                  <input type="radio" id="material-standart" name="material" value="standart">
+                  <label for="z-rotate">Standart</label><br>
+                  <input type="radio" id="material-img" name="material" value="img">
+                  <label for="material-img">Img</label><br>
+                  <input type="file" id="img-material">
+                </div>
+                <input type="button" onclick="setMaterial()" value="OK">
+              </div>
               </form>
-              <input type="button" onclick="setMaterial()" value="OK">
-            </div>
           </div>
           <div id="radio-selected-figure">
+            <h2>Select Working Group</h2>
             <input type="radio" name="group-radiob" value="null" id="null" onclick="setSelectedNull()">No Group<br>
           </div>
         </td>
@@ -224,8 +235,9 @@
         <td><img id="img-rotate" class="action" src="imgs/rotate.png" alt="Rotate" onclick="toolsEvent('14');"></td>
       </tr>
       <tr>
-        <td><input type="button" value="Play" onclick="toggleOrbit();"></td>
+        <td><input type="button" value="Orbit" onclick="toggleOrbit();"></td>
         <td><input type="button" onclick="toolsEvent('15');" value="+ Group"></td>
+        <td><input type="button" value="Play" onclick="playAnimation();"></td>
       </tr>
       <tr>
         <td></td>
@@ -233,7 +245,7 @@
       </tr>
     </table>
     <div style="float: center;">
-        <p>Figura seleccionada: <span id="span-selected"></span></p>
+        <p style="text-align: center;">Figura seleccionada: <span id="span-selected"></span></p>
     </div>
 </body>
 </html>

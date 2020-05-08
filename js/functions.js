@@ -267,3 +267,7 @@ function toggleOrbit(){
     camera.lookAt(new THREE.Vector3(0., 0., 0.));
   }
 }
+
+function playAnimation(){
+  animation = !animation;
+}
