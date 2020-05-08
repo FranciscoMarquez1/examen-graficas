@@ -7,7 +7,7 @@ var light;
 var mesh;
 var plane;
 var axes;
-var numCircle, numSquare, numPoint, numSphere;
+var numCircle, numSquare, numPoint, numSphere, numTriangle;
 var selectErase, selectPaint, selectAddGroup, selectedGroupTriangle;
 var colorInput;
 var groups;
@@ -40,7 +40,7 @@ function main()
     figSquare = "Square";
     figMaterial = "basic";
     groups = [];
-    numCircle = numSquare = numPoint = numSphere = 1;
+    numCircle = numSquare = numPoint = numSphere = numTriangle = 1;
 
     // INPUTS FROM HTML
     selectErase = document.getElementById("erase-figures");
