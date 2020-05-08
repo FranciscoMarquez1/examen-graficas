@@ -6,7 +6,24 @@ function toolsEvent(evt)
     // GEOMETRY
     switch (evt) {
       case "0":
-      //Selector
+      //Material
+        document.getElementById('plane-menu').style.display = 'none';
+        document.getElementById('triangle-menu').style.display = 'none';
+        document.getElementById('circle-menu').style.display = 'none';
+        document.getElementById('addGroup-menu').style.display = 'none';
+        document.getElementById('rectangle-menu').style.display = 'none';
+        document.getElementById('scale-menu').style.display = 'none';
+        document.getElementById('rotate-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
+        var result_style = document.getElementById('material-menu').style;
+        if(result_style.display == "none"){
+          result_style.display = 'flex';
+        }else{
+          result_style.display = 'none';
+          document.getElementById("x_point").value = '0';
+          document.getElementById("y_point").value = '0';
+          document.getElementById("z_point").value = '0';
+        }
         break;
       case "1":
       //Point
@@ -18,6 +35,7 @@ function toolsEvent(evt)
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
+        document.getElementById('material-menu').style.display = 'none';
         var result_style = document.getElementById('point-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -68,6 +86,7 @@ function toolsEvent(evt)
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
+        document.getElementById('material-menu').style.display = 'none';
         var result_style = document.getElementById('plane-menu').style;
         if(plane) scene.remove(plane);
         if(result_style.display == "none"){
@@ -98,6 +117,7 @@ function toolsEvent(evt)
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
+        document.getElementById('material-menu').style.display = 'none';
         var result_style = document.getElementById('triangle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -126,6 +146,7 @@ function toolsEvent(evt)
         document.getElementById('translate-menu').style.display = 'none';
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
+        document.getElementById('material-menu').style.display = 'none';
         var result_style = document.getElementById('line-width-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -144,6 +165,7 @@ function toolsEvent(evt)
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
+        document.getElementById('material-menu').style.display = 'none';
         var result_style = document.getElementById('rectangle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -167,6 +189,7 @@ function toolsEvent(evt)
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
+        document.getElementById('material-menu').style.display = 'none';
         var result_style = document.getElementById('circle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -193,6 +216,7 @@ function toolsEvent(evt)
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
+        document.getElementById('material-menu').style.display = 'none';
         var result_style = document.getElementById('translate-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -210,6 +234,7 @@ function toolsEvent(evt)
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('translate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
+        document.getElementById('material-menu').style.display = 'none';
         var result_style = document.getElementById('scale-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -227,6 +252,7 @@ function toolsEvent(evt)
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('translate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
+        document.getElementById('material-menu').style.display = 'none';
         var result_style = document.getElementById('rotate-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -245,6 +271,7 @@ function toolsEvent(evt)
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
+        document.getElementById('material-menu').style.display = 'none';
         var result_style = document.getElementById('addGroup-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -302,6 +329,12 @@ function initEventHandler(evt){
   for (var i = 0; i < square.length; i++) {
       square[i].addEventListener('change', function() {
           figSquare = this.value;
+      });
+  }
+  var materials = document.material_form.material;
+  for (var i = 0; i < materials.length; i++) {
+      materials[i].addEventListener('change', function() {
+          figMaterial = this.value;
       });
   }
 }

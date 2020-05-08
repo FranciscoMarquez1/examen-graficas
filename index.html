@@ -14,7 +14,7 @@
 	<h1>My Paint Scene 3D</h1>
 	<table>
       <tr>
-        <td><img id="img-selector" class="action" src="imgs/selector.png" alt="Selector" onclick="toolsEvent('0');"/></td>
+        <td><img id="img-selector" class="action" src="imgs/material.png" alt="Selector" onclick="toolsEvent('0');"/></td>
         <td><img id="img-point" class="action" src="imgs/point.png" alt="Create Point" onclick="toolsEvent('1');"/></td>
         <td rowspan="8"><canvas id="canvas" width="500" height="500"></canvas></td>
         <td colspan="2" rowspan="2">
@@ -164,6 +164,27 @@
               <input type="range" min="1" max="10" value="1" class="slider" id="line_range" oninput="setLineWidth()"><br>
             </div>
           </div>
+          <div class="cords" id="material-menu" style="display: none;">
+            <div>
+              <form name="material_form">
+                <input type="radio" id="material-basic" name="material" value="basic" checked>
+                <label for="y-rotate">Basic</label><br>
+                <input type="radio" id="material-normal" name="material" value="normal">
+                <label for="x-rotate">Normal</label><br>
+                <input type="radio" id="material-depth" name="material" value="depth">
+                <label for="z-rotate">Depth</label><br>
+                <input type="radio" id="material-lambert" name="material" value="lambert">
+                <label for="z-rotate">Lambert</label><br>
+                <input type="radio" id="material-phong" name="material" value="phong">
+                <label for="z-rotate">Phong</label><br>
+                <input type="radio" id="material-physical" name="material" value="physical">
+                <label for="z-rotate">Physical</label><br>
+                <input type="radio" id="material-standart" name="material" value="standart">
+                <label for="z-rotate">Standart</label><br>
+              </form>
+              <input type="button" onclick="setMaterial()" value="OK">
+            </div>
+          </div>
           <div id="radio-selected-figure">
           </div>
         </td>
@@ -185,7 +206,7 @@
         <td><img id="img-circle" class="action" src="imgs/circle.jpg" alt="Create Circle" onclick="toolsEvent('9');"/></td>
       </tr>
       <tr>
-        <td><input id="color-palette" class="action" src="imgs/pallete.png" type="color" name="name" value="#000000" onclick="toolsEvent('10');"></td>
+        <td><input id="color-palette" class="action" src="imgs/pallete.png" type="color" name="name" value="#ffffff" onclick="toolsEvent('10');"></td>
         <td><img id="img-polygon" class="action" src="imgs/polygon.png" alt="Create Polygon" onclick="toolsEvent('11');"/></td>
       </tr>
       <tr>

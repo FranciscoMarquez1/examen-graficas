@@ -71,7 +71,7 @@ function addTriangle(){
   geometry.computeFaceNormals();
 
   //MATERIAL
-  material = new THREE.MeshBasicMaterial({color: colorInput.value});
+  material = getMaterial();
   //MESH (GEOMETRY + MATERIAL)
   mesh = new THREE.Mesh(geometry, material);
 
@@ -84,7 +84,8 @@ function addTriangle(){
 
 function addCircle(){
   r = document.getElementById("r_circle").value;
-  material = new THREE.MeshBasicMaterial({color: colorInput.value, side: THREE.DoubleSide});
+  material = getMaterial();
+  material.side = THREE.DoubleSide
   switch (figCircle) {
     case "Circle":
       geometry = new THREE.CircleGeometry(r, 20);
@@ -100,8 +101,9 @@ function addCircle(){
 
       if(selectedGroup != undefined){
         selectedGroup.add(mesh)
+      }else {
+        scene.add(mesh);
       }
-      scene.add(mesh);
       break;
     case "Sphere":
       geometry = new THREE.SphereGeometry(r, 20, 20);
@@ -110,8 +112,9 @@ function addCircle(){
       numSphere++;
       if(selectedGroup != undefined){
         selectedGroup.add(mesh)
+      }else {
+        scene.add(mesh);
       }
-      scene.add(mesh);
       break;
     default:
 
@@ -125,23 +128,22 @@ function addRectangle(){
   var height = document.getElementById("h_cube").value;
   var depth = document.getElementById("d_cube").value;
 
+  material = getMaterial();
+  material.side = THREE.DoubleSide;
   switch (figSquare) {
     case "Square":
       geometry = new THREE.PlaneGeometry(width, height, depth);
-      material = new THREE.MeshBasicMaterial({color: colorInput.value, side: THREE.DoubleSide});
       mesh = new THREE.Mesh(geometry, material);
       mesh.name = "Square " + numSquare;
       numSquare++;
       if(selectedGroup != undefined){
         selectedGroup.add(mesh)
+      }else {
+        scene.add(mesh);
       }
-      scene.add(mesh);
       break;
     case "Cube":
       geometry = new THREE.BoxGeometry(width, height, depth);
-      //MATERIAL
-      material = new THREE.MeshBasicMaterial({color: colorInput.value});
-      //MESH (GEOMETRY + MATERIAL)
       mesh = new THREE.Mesh(geometry, material);
       mesh.name = "Square " + numSquare;
       numSquare++;
@@ -192,6 +194,43 @@ function rotate(){
       break;
     default:
   }
+}
+
+function setMaterial(){
+  if(selected) selected.material = getMaterial();
+  if(selectedGroup){
+    for(var i = 0; i < selectedGroup.children.length; i++){
+        selectedGroup.children[i].material = getMaterial();
+      }
+  }
+}
+function getMaterial(){
+  var material = null;
+  switch (figMaterial) {
+    case "basic":
+      material = new THREE.MeshBasicMaterial({color: colorInput.value});
+      break;
+    case "normal":
+      material = new THREE.MeshNormalMaterial();
+      break;
+    case "depth":
+      material = new THREE.MeshDepthMaterial();
+      break;
+    case "lambert":
+      material = new THREE.MeshLambertMaterial({color: colorInput.value});
+      break;
+    case "phong":
+      material = new THREE.MeshPhongMaterial({color: colorInput.value});
+      break;
+    case "physical":
+      material = new THREE.MeshPhysicalMaterial({color: colorInput.value});
+      break;
+    case "standart":
+      material = new THREE.MeshStandardMaterial({color: colorInput.value});
+      break;
+    default:
+  }
+  return material;
 }
 
 function setLineWidth(){
