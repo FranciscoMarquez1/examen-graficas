@@ -84,13 +84,20 @@ function addTriangle(){
 
 function addCircle(){
   r = document.getElementById("r_circle").value;
+  material = new THREE.MeshBasicMaterial({color: colorInput.value, side: THREE.DoubleSide});
   switch (figCircle) {
     case "Circle":
       geometry = new THREE.CircleGeometry(r, 20);
-      material = new THREE.MeshBasicMaterial({color: colorInput.value});
       mesh = new THREE.Mesh(geometry, material);
       mesh.name = "Circle" + numCircle
       numCircle++;
+      var face1 = new THREE.Face3(1, 0, 2);
+      var face2 = new THREE.Face3(20, 1, 1);
+      var face3 = new THREE.Face3(1, 1, 20);
+
+      geometry.faces.push(face1);
+
+
       if(selectedGroup != undefined){
         selectedGroup.add(mesh)
       }
@@ -98,7 +105,6 @@ function addCircle(){
       break;
     case "Sphere":
       geometry = new THREE.SphereGeometry(r, 20, 20);
-      material = new THREE.MeshBasicMaterial({color: colorInput.value});
       mesh = new THREE.Mesh(geometry, material);
       mesh.name = "Sphere" + numCircle
       numSphere++;
