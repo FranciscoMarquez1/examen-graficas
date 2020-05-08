@@ -322,7 +322,29 @@ function watchColorPicker(event) {
   }
 }
 
+function clickSubmitEventListener(event)
+{
+	var fileNameNew;
+	try
+	{
+		fileNameNew = "\\models\\" + document.getElementById("file").files[0].name;
+	}
+	catch(err)
+	{
+		document.getElementById("lab-msg").innerHTML = "Error when loading a file!";
+	}
+	if(fileNameNew)
+	{
+		if(fileNameNew != fileName)
+		{
+			fileName = fileNameNew;
+			load(fileName);
+		}
+	}
+}
+
 function initEventHandler(evt){
+  document.getElementById("submit").addEventListener('click', clickSubmitEventListener, false);
   document.getElementById("canvas").addEventListener('mousemove', onCanvasMouseMove, false );
   document.getElementById("canvas").addEventListener('click', onCanvasMouseClick, false );
   document.querySelector("#color-palette").addEventListener('change', watchColorPicker, false);

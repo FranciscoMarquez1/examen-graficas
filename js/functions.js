@@ -271,3 +271,31 @@ function toggleOrbit(){
 function playAnimation(){
   animation = !animation;
 }
+
+function load(filename){
+  var object;
+
+  function loadModel() {
+    object.position.y = 0;
+		scene.add( object );
+  }
+
+	var manager = new THREE.LoadingManager( loadModel );
+  manager.onProgress = function ( item, loaded, total ) {
+    console.log( item, loaded, total );
+  };
+
+	function onProgress( xhr ) {
+    if ( xhr.lengthComputable ) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      console.log( 'model ' + Math.round( percentComplete, 2 ) + '% downloaded' );
+    }
+  }
+
+  function onError() {}
+  var loader = new OBJLoader(manager);
+  loader.load( filename, function ( obj ) {
+    object = obj;
+  }, onProgress, onError );
+
+}

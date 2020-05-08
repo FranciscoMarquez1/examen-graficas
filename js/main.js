@@ -19,9 +19,11 @@ var figCircle, figSquare, figMaterial;
 var orbit, animation;
 var angle, radius;
 var angleR;
+var fileName;
 
 function main()
 {
+    fileName = "";
     // RENDERER
     canvas = document.getElementById("canvas");
     renderer = new THREE.WebGLRenderer({canvas: canvas});

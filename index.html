@@ -6,6 +6,7 @@
     <script src="js/lib/three.min.js" type="text/javascript"></script>
     <script src="js/lib/orbit-controls.js" type="text/javascript"></script>
     <script src="js/event-handler.js" type="text/javascript"></script>
+    <script src="js/lib/obj.js" type="text/javascript"></script>
     <script src="js/functions.js" type="text/javascript"></script>
     <script src="js/axes.js" type="text/javascript"></script>
     <script src="js/main.js" type="text/javascript"></script>
@@ -233,15 +234,14 @@
       </tr>
       <tr>
         <td><img id="img-rotate" class="action" src="imgs/rotate.png" alt="Rotate" onclick="toolsEvent('14');"></td>
+        <td></td>
+        <td><input type="file" id="file" accept=".obj"><br>
+				<input type="submit" id="submit"></td>
       </tr>
       <tr>
         <td><input type="button" value="Orbit" onclick="toggleOrbit();"></td>
         <td><input type="button" onclick="toolsEvent('15');" value="+ Group"></td>
         <td><input type="button" value="Play" onclick="playAnimation();"></td>
-      </tr>
-      <tr>
-        <td></td>
-          <td></td>
       </tr>
     </table>
     <div style="float: center;">
