@@ -153,8 +153,14 @@ function toolsEvent(evt)
         break;
       case "8":
       //Fill or wireframe
-        if(selected) selected.material.wireframe = !selected.material.wireframe;
-        if(selectedGroup) selectedGroup.material.wireframe = !selectedGroup.material.wireframe;
+        if(selected) {
+          selected.material.wireframe = !selected.material.wireframe
+        }
+        else if (selectedGroup){
+          for(var i = 0; i < selectedGroup.children.length; i++){
+            selectedGroup.children[i].material.wireframe = !selectedGroup.children[i].material.wireframe;
+          }
+        }
         break;
       case "9":
       //Circle or sphere
@@ -279,7 +285,14 @@ function onCanvasMouseClick(event){
 }
 
 function watchColorPicker(event) {
-  if(selected) selected.material.color.set(event.target.value);
+  if(selected) {
+    selected.material.color.set(event.target.value);
+  }
+  else if (selectedGroup){
+    for(var i = 0; i < selectedGroup.children.length; i++){
+      selectedGroup.children[i].material.color.set(event.target.value);
+    }
+  }
 }
 
 function initEventHandler(evt){

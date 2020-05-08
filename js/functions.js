@@ -74,7 +74,8 @@ function addTriangle(){
   material = new THREE.MeshBasicMaterial({color: colorInput.value});
   //MESH (GEOMETRY + MATERIAL)
   mesh = new THREE.Mesh(geometry, material);
-
+  mesh.name = "Triangle " + numTriangle;
+  numTriangle++;
   if(selectedGroup != undefined){
     selectedGroup.add(mesh)
   }else {
@@ -194,4 +195,8 @@ function setLineWidth(){
   if(selected) selected.material.wireframeLinewidth = width;
   if(selectedGroup) selectedGroup.material.wireframeLinewidth = width;
 
+}
+
+function setSelectedNull(){
+  selectedGroup = undefined;
 }
