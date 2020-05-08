@@ -84,19 +84,33 @@ function addTriangle(){
 
 function addCircle(){
   r = document.getElementById("r_circle").value;
-  theta = document.getElementById("theta_circle").value;
-  geometry = new THREE.CircleGeometry(r, 20, theta);
-  material = new THREE.MeshBasicMaterial({color: colorInput.value});
-  mesh = new THREE.Mesh(geometry, material);
-  mesh.name = "Circle " + numCircle
-  numCircle++;
-  var option = document.createElement("option");
-  option.text = mesh.name;
+  switch (figCircle) {
+    case "Circle":
+      geometry = new THREE.CircleGeometry(r, 20);
+      material = new THREE.MeshBasicMaterial({color: colorInput.value});
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.name = "Circle" + numCircle
+      numCircle++;
+      if(selectedGroup != undefined){
+        selectedGroup.add(mesh)
+      }
+      scene.add(mesh);
+      break;
+    case "Sphere":
+      geometry = new THREE.SphereGeometry(r, 20, 20);
+      material = new THREE.MeshBasicMaterial({color: colorInput.value});
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.name = "Sphere" + numCircle
+      numSphere++;
+      if(selectedGroup != undefined){
+        selectedGroup.add(mesh)
+      }
+      scene.add(mesh);
+      break;
+    default:
 
-  if(selectedGroup != undefined){
-    selectedGroup.add(mesh)
   }
-  scene.add(mesh);
+
   //sceneReady = true;
 }
 
@@ -140,7 +154,6 @@ function scale(){
 
 function rotate(){
   var theta = document.getElementById("rotate_theta").value;
-
   switch (rotate_axis) {
     case "x":
       if(selected) selected.rotation.x = selected.rotation.x + (theta * Math.PI)/180 ;
@@ -155,8 +168,13 @@ function rotate(){
       if(selectedGroup) selectedGroup.rotation.z = selectedGroup.rotation.z + (theta * Math.PI)/180 ;
       break;
     default:
-
   }
+}
 
+function setLineWidth(){
+  var width = document.getElementById("line_range").value;
+
+  if(selected) selected.material.wireframeLinewidth = width;
+  if(selectedGroup) selectedGroup.material.wireframeLinewidth = width;
 
 }

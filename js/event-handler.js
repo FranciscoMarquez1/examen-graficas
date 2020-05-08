@@ -17,6 +17,7 @@ function toolsEvent(evt)
         document.getElementById('rectangle-menu').style.display = 'none';
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
         var result_style = document.getElementById('point-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -66,6 +67,7 @@ function toolsEvent(evt)
         document.getElementById('translate-menu').style.display = 'none';
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
         var result_style = document.getElementById('plane-menu').style;
         if(plane) scene.remove(plane);
         if(result_style.display == "none"){
@@ -95,6 +97,7 @@ function toolsEvent(evt)
         document.getElementById('translate-menu').style.display = 'none';
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
         var result_style = document.getElementById('triangle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -115,6 +118,20 @@ function toolsEvent(evt)
         break;
       case "6":
       //Line-width
+        document.getElementById('plane-menu').style.display = 'none';
+        document.getElementById('triangle-menu').style.display = 'none';
+        document.getElementById('circle-menu').style.display = 'none';
+        document.getElementById('point-menu').style.display = 'none';
+        document.getElementById('addGroup-menu').style.display = 'none';
+        document.getElementById('translate-menu').style.display = 'none';
+        document.getElementById('scale-menu').style.display = 'none';
+        document.getElementById('rotate-menu').style.display = 'none';
+        var result_style = document.getElementById('line-width-menu').style;
+        if(result_style.display == "none"){
+          result_style.display = 'flex';
+        }else{
+          result_style.display = 'none';
+        }
         break;
       case "7":
       //Rectangle or cube
@@ -126,6 +143,7 @@ function toolsEvent(evt)
         document.getElementById('translate-menu').style.display = 'none';
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
         var result_style = document.getElementById('rectangle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -135,6 +153,8 @@ function toolsEvent(evt)
         break;
       case "8":
       //Fill or wireframe
+        if(selected) selected.material.wireframe = !selected.material.wireframe;
+        if(selectedGroup) selectedGroup.material.wireframe = !selectedGroup.material.wireframe;
         break;
       case "9":
       //Circle or sphere
@@ -146,6 +166,7 @@ function toolsEvent(evt)
         document.getElementById('translate-menu').style.display = 'none';
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
         var result_style = document.getElementById('circle-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -171,6 +192,7 @@ function toolsEvent(evt)
         document.getElementById('addGroup-menu').style.display = 'none';
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
         var result_style = document.getElementById('translate-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -187,6 +209,7 @@ function toolsEvent(evt)
         document.getElementById('addGroup-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('translate-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
         var result_style = document.getElementById('scale-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -203,6 +226,7 @@ function toolsEvent(evt)
         document.getElementById('addGroup-menu').style.display = 'none';
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('translate-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
         var result_style = document.getElementById('rotate-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -220,6 +244,7 @@ function toolsEvent(evt)
         document.getElementById('translate-menu').style.display = 'none';
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
         var result_style = document.getElementById('addGroup-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -261,10 +286,16 @@ function initEventHandler(evt){
   document.getElementById("canvas").addEventListener('mousemove', onCanvasMouseMove, false );
   document.getElementById("canvas").addEventListener('click', onCanvasMouseClick, false );
   document.querySelector("#color-palette").addEventListener('change', watchColorPicker, false);
-  var rad = document.rotation_axis.axis_rotate;
-  for (var i = 0; i < rad.length; i++) {
-      rad[i].addEventListener('change', function() {
+  var rotation = document.rotation_axis.axis_rotate;
+  for (var i = 0; i < rotation.length; i++) {
+      rotation[i].addEventListener('change', function() {
           rotate_axis = this.value;
+      });
+  }
+  var circle = document.circular_fig.figCir;
+  for (var i = 0; i < circle.length; i++) {
+      circle[i].addEventListener('change', function() {
+          figCircle = this.value;
       });
   }
 }

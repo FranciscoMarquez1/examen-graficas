@@ -79,13 +79,15 @@
             </div>
           </div>
           <div class="cords" id="circle-menu" style="display: none;">
+            <form name="circular_fig">
+              <input type="radio" id="fig_circle" name="figCir" value="Circle" checked>
+              <label for="x-rotate">Circle</label><br>
+              <input type="radio" id="fig_sphere" name="figCir" value="Sphere">
+              <label for="y-rotate">Sphere</label>
+            </form><br>
             <div>
               <label>Radius:</label><br>
-              <input class="cords_fields" type="number" id="r_circle" value="1">
-            </div>
-            <div>
-              <label>Theta:</label><br>
-              <input class="cords_fields" type="number" id="theta_circle" value="0"><br>
+              <input class="cords_fields" type="number" id="r_circle" value="1"><br>
               <input type="button" onclick="addCircle()" value="OK">
             </div>
           </div>
@@ -148,6 +150,12 @@
                 <label for="z-rotate">Z</label><br>
               </form>
               <input type="button" onclick="rotate()" value="OK">
+            </div>
+          </div>
+          <div class="cords" id="line-width-menu" style="display: none;">
+            <div>
+              <label>Line Width:</label><br>
+              <input type="range" min="1" max="10" value="1" class="slider" id="line_range" oninput="setLineWidth()"><br>
             </div>
           </div>
           <div id="radio-selected-figure">

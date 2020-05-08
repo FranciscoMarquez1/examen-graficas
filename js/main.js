@@ -7,7 +7,7 @@ var light;
 var mesh;
 var plane;
 var axes;
-var numCircle, numSquare, numPoint;
+var numCircle, numSquare, numPoint, numSphere;
 var selectErase, selectPaint, selectAddGroup, selectedGroupTriangle;
 var colorInput;
 var groups;
@@ -15,6 +15,7 @@ var selected, selectedGroup;
 var rotate_axis;
 var raycaster, intersects;
 var mouse;
+var figCircle, figRectangle;
 
 
 function main()
@@ -35,8 +36,9 @@ function main()
     rotate_axis = "x";
 
     //GEOMETRY and MATERIAL
+    figCircle = "Circle";
     groups = [];
-    numCircle = numSquare = numPoint = 1;
+    numCircle = numSquare = numPoint = numSphere = 1;
 
     // INPUTS FROM HTML
     selectErase = document.getElementById("erase-figures");
