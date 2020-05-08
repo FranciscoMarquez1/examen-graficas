@@ -6,6 +6,7 @@
     <script src="js/lib/three.min.js" type="text/javascript"></script>
     <script src="js/lib/orbit-controls.js" type="text/javascript"></script>
     <script src="js/event-handler.js" type="text/javascript"></script>
+    <script src="js/functions.js" type="text/javascript"></script>
     <script src="js/axes.js" type="text/javascript"></script>
     <script src="js/main.js" type="text/javascript"></script>
 </head>
@@ -13,8 +14,8 @@
 	<h1>My Paint Scene 3D</h1>
 	<table>
       <tr>
-        <td><img id="img-selector" class="action" src="imgs/selector.png" alt="" onclick="toolsEvent('0');"/></td>
-        <td><img id="img-point" class="action" src="imgs/point.png" alt="" onclick="toolsEvent('1');"/></td>
+        <td><img id="img-selector" class="action" src="imgs/selector.png" alt="Selector" onclick="toolsEvent('0');"/></td>
+        <td><img id="img-point" class="action" src="imgs/point.png" alt="Create Point" onclick="toolsEvent('1');"/></td>
         <td rowspan="8"><canvas id="canvas" width="500" height="500"></canvas></td>
         <td colspan="2" rowspan="2">
           <div class="cords" id="point-menu" style="display: none;">
@@ -110,34 +111,86 @@
               <input type="button" onclick="addGroup()" value="OK">
             </div>
           </div>
+          <div class="cords" id="translate-menu" style="display: none;">
+            <div>
+              <label>Move to:</label><br>
+              <label>X:</label>
+              <input class="cords_fields" type="number" id="translate_x" value="0"><br>
+              <label>Y:</label>
+              <input class="cords_fields" type="number" id="translate_y" value="0"><br>
+              <label>Z:</label>
+              <input class="cords_fields" type="number" id="translate_z" value="0"><br>
+              <input type="button" onclick="moveTo()" value="OK">
+            </div>
+          </div>
+          <div class="cords" id="scale-menu" style="display: none;">
+            <div>
+              <label>Scale:</label><br>
+              <label>X:</label>
+              <input class="cords_fields" type="number" id="scale_x" value="1"><br>
+              <label>Y:</label>
+              <input class="cords_fields" type="number" id="scale_y" value="1"><br>
+              <label>Z:</label>
+              <input class="cords_fields" type="number" id="scale_z" value="1"><br>
+              <input type="button" onclick="scale()" value="OK">
+            </div>
+          </div>
+          <div class="cords" id="rotate-menu" style="display: none;">
+            <div>
+              <label>Angle:</label><br>
+              <input class="cords_fields" type="number" id="rotate_theta" value="1"><br>
+              <form name="rotation_axis">
+                <input type="radio" id="x-rotate" name="axis_rotate" value="x" checked>
+                <label for="x-rotate">X</label><br>
+                <input type="radio" id="y-rotate" name="axis_rotate" value="y">
+                <label for="y-rotate">Y</label><br>
+                <input type="radio" id="z-rotate" name="axis_rotate" value="z">
+                <label for="z-rotate">Z</label><br>
+              </form>
+              <input type="button" onclick="rotate()" value="OK">
+            </div>
+          </div>
           <div id="radio-selected-figure">
-
           </div>
         </td>
       </tr>
       <tr>
-        <td><img id="img-eraser" class="action" src="imgs/eraser.png" alt="" onclick="toolsEvent('2');"></td>
-        <td><img id="img-segment" class="action" src="imgs/plane.jpg" alt="" onclick="toolsEvent('3');"/></td>
+        <td><img id="img-eraser" class="action" src="imgs/eraser.png" alt="Erase" onclick="toolsEvent('2');"></td>
+        <td><img id="img-segment" class="action" src="imgs/plane.jpg" alt="Add Plane" onclick="toolsEvent('3');"/></td>
       </tr>
       <tr>
-        <td><img id="img-clear-all" class="action" src="imgs/clear.png" alt="" onclick="toolsEvent('4');"/></td>
-        <td><img id="img-triangle" class="action" src="imgs/triangle.png" alt="" onclick="toolsEvent('5');"/></td>
+        <td><img id="img-clear-all" class="action" src="imgs/clear.png" alt="Clear All" onclick="toolsEvent('4');"/></td>
+        <td><img id="img-triangle" class="action" src="imgs/triangle.png" alt="Create Triangle" onclick="toolsEvent('5');"/></td>
       </tr>
       <tr>
-        <td><img id="img-line-width" class="action" src="imgs/lines_width.png" alt="" onclick="toolsEvent('6');"/></td>
+        <td><img id="img-line-width" class="action" src="imgs/lines_width.png" alt="Line Width" onclick="toolsEvent('6');"/></td>
         <td><img id="img-rectangle" class="action" src="imgs/cube.png" alt="" onclick="toolsEvent('7');"/></td>
       </tr>
       <tr>
-        <td><img id="img-fill-polygon" class="action" src="imgs/bucket.png" alt="" onclick="toolsEvent('8');"/></td>
-        <td><img id="img-circle" class="action" src="imgs/circle.jpg" alt="" onclick="toolsEvent('9');"/></td>
+        <td><img id="img-fill-polygon" class="action" src="imgs/bucket.png" alt="Solid/Wireframe" onclick="toolsEvent('8');"/></td>
+        <td><img id="img-circle" class="action" src="imgs/circle.jpg" alt="Create Circle" onclick="toolsEvent('9');"/></td>
       </tr>
       <tr>
         <td><input id="color-palette" class="action" src="imgs/pallete.png" type="color" name="name" value="#000000" onclick="toolsEvent('10');"></td>
-        <td><img id="img-polygon" class="action" src="imgs/polygon.png" alt="" onclick="toolsEvent('11');"/></td>
+        <td><img id="img-polygon" class="action" src="imgs/polygon.png" alt="Create Polygon" onclick="toolsEvent('11');"/></td>
+      </tr>
+      <tr>
+        <td colspan="2"><label>Movement</label></td>
+      </tr>
+      <tr>
+        <td><img id="img-translate" class="action" src="imgs/move.png" alt="Translate" onclick="toolsEvent('12');"></td>
+        <td><img id="img-scale" class="action" src="imgs/scale.jpg" alt="Scale" onclick="toolsEvent('13');"/></td>
+      </tr>
+      <tr>
+        <td><img id="img-rotate" class="action" src="imgs/rotate.png" alt="Rotate" onclick="toolsEvent('14');"></td>
       </tr>
       <tr>
         <td><input type="button" value="Play"></td>
-        <td><input type="button" onclick="toolsEvent('12');" value="+ Group"></td>
+        <td><input type="button" onclick="toolsEvent('15');" value="+ Group"></td>
+      </tr>
+      <tr>
+        <td></td>
+          <td></td>
       </tr>
     </table>
     <div style="float: center;">

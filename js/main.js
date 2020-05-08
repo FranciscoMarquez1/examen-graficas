@@ -6,13 +6,13 @@ var camera;
 var light;
 var mesh;
 var plane;
-var sceneReady = false;
 var axes;
 var numCircle, numSquare, numPoint;
 var selectErase, selectPaint, selectAddGroup, selectedGroupTriangle;
 var colorInput;
 var groups;
 var selected, selectedGroup;
+var rotate_axis;
 var raycaster, intersects;
 var mouse;
 
@@ -29,8 +29,10 @@ function main()
     raycaster = new THREE.Raycaster();
     intersects = null;
     mouse = new THREE.Vector2(), THREE.INTERSECTED;
+
     //AXES
     axes = new Axes();
+    rotate_axis = "x";
 
     //GEOMETRY and MATERIAL
     groups = [];
