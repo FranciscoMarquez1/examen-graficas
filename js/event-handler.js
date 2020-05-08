@@ -15,6 +15,8 @@ function toolsEvent(evt)
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
+        document.getElementById('translate-menu').style.display = 'none';
+        document.getElementById('point-menu').style.display = 'none';
         var result_style = document.getElementById('material-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -36,6 +38,7 @@ function toolsEvent(evt)
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('line-width-menu').style.display = 'none';
         document.getElementById('material-menu').style.display = 'none';
+        document.getElementById('translate-menu').style.display = 'none';
         var result_style = document.getElementById('point-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
@@ -147,6 +150,7 @@ function toolsEvent(evt)
         document.getElementById('scale-menu').style.display = 'none';
         document.getElementById('rotate-menu').style.display = 'none';
         document.getElementById('material-menu').style.display = 'none';
+        document.getElementById('line-width-menu').style.display = 'none';
         var result_style = document.getElementById('line-width-menu').style;
         if(result_style.display == "none"){
           result_style.display = 'flex';
