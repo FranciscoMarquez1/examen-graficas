@@ -33,9 +33,26 @@ function toolsEvent(evt)
         if(selected){
           scene.remove(selected);
           selected = null;
+          document.getElementById("span-selected").innerHTML = "";
         }
         if(selectedGroup){
           scene.remove(selectedGroup);
+          var wasPoped = false;
+          for (i = 0; i < groups.length - 1; i++){
+            if (groups[i] === selectedGroup){
+              groups.splice(i, 1);
+              i--;
+              wasPoped = true;
+            }
+            if (wasPoped){
+              var target = i + 2;
+              var byValue = document.querySelectorAll('input[value="' + target +'"]')
+              byValue[0].value = i + 1;
+            }
+          }
+          document.getElementById(selectedGroup.name).nextSibling.remove();
+          document.getElementById(selectedGroup.name).nextSibling.remove();
+          document.getElementById(selectedGroup.name).remove();
           selectedGroup = null;
         }
         break;
@@ -226,9 +243,11 @@ function onCanvasMouseClick(event){
         event.preventDefault();
         if ( intersects.length > 0 ) {
     			if ( selected != intersects[ 0 ].object ) {
-    				selected = intersects[ 0 ].object;
+            selected = intersects[ 0 ].object;
+            document.getElementById("span-selected").innerHTML = selected.name;
     			}else {
             selected = null;
+            document.getElementById("span-selected").innerHTML = "";
           }
     		}
 
