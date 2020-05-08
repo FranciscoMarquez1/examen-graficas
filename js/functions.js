@@ -119,17 +119,34 @@ function addRectangle(){
   var height = document.getElementById("h_cube").value;
   var depth = document.getElementById("d_cube").value;
 
-  geometry = new THREE.BoxGeometry(width, height, depth);
-  //MATERIAL
-  material = new THREE.MeshBasicMaterial({color: colorInput.value});
-  //MESH (GEOMETRY + MATERIAL)
-  mesh = new THREE.Mesh(geometry, material);
-  mesh.name = "Square " + numSquare;
-  numSquare++;
-  if(selectedGroup != undefined){
-    selectedGroup.add(mesh);
-  }else {
-  scene.add(mesh);
+  switch (figSquare) {
+    case "Square":
+      geometry = new THREE.PlaneGeometry(width, height, depth);
+      material = new THREE.MeshBasicMaterial({color: colorInput.value, side: THREE.DoubleSide});
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.name = "Square " + numSquare;
+      numSquare++;
+      if(selectedGroup != undefined){
+        selectedGroup.add(mesh)
+      }
+      scene.add(mesh);
+      break;
+    case "Cube":
+      geometry = new THREE.BoxGeometry(width, height, depth);
+      //MATERIAL
+      material = new THREE.MeshBasicMaterial({color: colorInput.value});
+      //MESH (GEOMETRY + MATERIAL)
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.name = "Square " + numSquare;
+      numSquare++;
+      if(selectedGroup != undefined){
+        selectedGroup.add(mesh);
+      }else {
+      scene.add(mesh);
+      }
+      break;
+    default:
+
   }
 }
 

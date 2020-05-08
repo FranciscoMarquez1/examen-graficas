@@ -15,7 +15,7 @@ var selected, selectedGroup;
 var rotate_axis;
 var raycaster, intersects;
 var mouse;
-var figCircle, figRectangle;
+var figCircle, figSquare;
 
 
 function main()
@@ -37,6 +37,7 @@ function main()
 
     //GEOMETRY and MATERIAL
     figCircle = "Circle";
+    figSquare = "Square"
     groups = [];
     numCircle = numSquare = numPoint = numSphere = 1;
 
