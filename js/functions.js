@@ -229,6 +229,9 @@ function getMaterial(){
     case "standart":
       material = new THREE.MeshStandardMaterial({color: colorInput.value});
       break;
+    case "img":
+      material = getImageMaterial();
+      break;
     default:
   }
   return material;
@@ -238,8 +241,19 @@ function setLineWidth(){
   var width = document.getElementById("line_range").value;
 
   if(selected) selected.material.wireframeLinewidth = width;
-  if(selectedGroup) selectedGroup.material.wireframeLinewidth = width;
+  if(selectedGroup){
+    for(var i = 0; i < selectedGroup.children.length; i++){
+        selectedGroup.children[i].material.wireframeLinewidth = width;
+      }
+  }
 
+}
+
+function getImageMaterial(){
+  var archiv = "/material-images/" + document.getElementById("img-material").files[0].name;
+  console.log(archiv);
+  var material = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load(archiv)});
+  return material;
 }
 
 function setSelectedNull(){

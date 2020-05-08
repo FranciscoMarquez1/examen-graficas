@@ -58,7 +58,7 @@ function main()
     // CAMERAS
     orbit = false;
     angle = 0;
-    radius = 3.;
+    radius = 10.;
     camera = new THREE.PerspectiveCamera(60., canvas.width / canvas.height, 0.01, 10000.);  // CAMERA
     camera.position.set(0., 0., 5.);
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
