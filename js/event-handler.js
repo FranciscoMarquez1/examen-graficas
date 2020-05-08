@@ -298,4 +298,10 @@ function initEventHandler(evt){
           figCircle = this.value;
       });
   }
+  var square = document.square_fig.figSqr;
+  for (var i = 0; i < square.length; i++) {
+      square[i].addEventListener('change', function() {
+          figSquare = this.value;
+      });
+  }
 }
