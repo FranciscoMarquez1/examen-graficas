@@ -16,8 +16,9 @@ var rotate_axis;
 var raycaster, intersects;
 var mouse;
 var figCircle, figSquare, figMaterial;
-var orbit;
+var orbit, animation;
 var angle, radius;
+var angleR;
 
 function main()
 {
@@ -57,6 +58,8 @@ function main()
 
     // CAMERAS
     orbit = false;
+    animation = false;
+    angleR = 0.1;
     angle = 0;
     radius = 3.;
     camera = new THREE.PerspectiveCamera(60., canvas.width / canvas.height, 0.01, 10000.);  // CAMERA
@@ -88,6 +91,10 @@ function renderLoop() {
       camera.position.z = radius * Math.sin( angle );
       angle += 0.01;
       camera.lookAt(new THREE.Vector3(0., 0., 0.));
+    }
+    if(animation == true){
+      if(selected) selected.rotation.x = selected.rotation.x + angleR ;
+      if(selectedGroup) selectedGroup.rotation.x = selectedGroup.rotation.x + angleR;
     }
     renderer.render(scene, camera);
 
