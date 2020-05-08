@@ -16,7 +16,8 @@ var rotate_axis;
 var raycaster, intersects;
 var mouse;
 var figCircle, figSquare;
-
+var orbit;
+var angle, radius;
 
 function main()
 {
@@ -41,6 +42,7 @@ function main()
     groups = [];
     numCircle = numSquare = numPoint = numSphere = numTriangle = 1;
 
+
     // INPUTS FROM HTML
     selectErase = document.getElementById("erase-figures");
     selectPaint = document.getElementById("painter-figures");
@@ -53,6 +55,9 @@ function main()
     light = new THREE.AmbientLight();
 
     // CAMERAS
+    orbit = false;
+    angle = 0;
+    radius = 3.;
     camera = new THREE.PerspectiveCamera(60., canvas.width / canvas.height, 0.01, 10000.);  // CAMERA
     camera.position.set(0., 0., 5.);
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -77,8 +82,14 @@ function renderLoop() {
     raycaster.setFromCamera( mouse, camera );
 
 		intersects = raycaster.intersectObjects( scene.children );
-
+    if (orbit){
+      camera.position.x = radius * Math.cos(angle); 
+      camera.position.z = radius * Math.sin( angle ); 
+      angle += 0.01;
+      camera.lookAt(new THREE.Vector3(0., 0., 0.));
+    }
     renderer.render(scene, camera);
+
 }
 
 function addGroup(){
