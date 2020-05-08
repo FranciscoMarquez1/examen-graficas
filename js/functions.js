@@ -245,3 +245,11 @@ function setLineWidth(){
 function setSelectedNull(){
   selectedGroup = undefined;
 }
+
+function toggleOrbit(){
+  orbit = !orbit;
+  if(orbit == true){
+    camera.position.set(0., 0., 5.);
+    camera.lookAt(new THREE.Vector3(0., 0., 0.));
+  }
+}
